@@ -12,32 +12,32 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cube.monitor.dao.MonitorDao;
 import com.cube.monitor.domain.Monitor;
+import com.cube.monitor.service.MonitorService;
 
 @RestController
 @RequestMapping("monitor")
 public class MonitorController {
 	
 	@Autowired
-	MonitorDao monitorDao;
+	MonitorService monitorService;
 
 	@GetMapping("/{index}")
 	public Optional<Monitor> get(HttpServletRequest req,  @PathVariable long index)
 	{
-		return monitorDao.findById(index);
+		return monitorService.get(index);
 	}
 	
 	@PostMapping("/")
 	public Monitor create(HttpServletRequest req, Monitor mon)
 	{
-		return monitorDao.save(mon);
+		return monitorService.create(mon);
 	}
 	
 	@PutMapping("/")
 	public Monitor update(HttpServletRequest req,  Monitor mon)
 	{
-		return monitorDao.save(mon);
+		return monitorService.update(mon);
 	}
 	
 }
